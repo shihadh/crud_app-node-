@@ -33,7 +33,7 @@ app.post('/api/add_product',(req,res)=>{
         'prodect': data
     })
 })
-
+// get api
 app.get('/api/get_product',(req,res)=>{
 
     if(products.length > 0){
@@ -48,4 +48,32 @@ app.get('/api/get_product',(req,res)=>{
             'product' : []
         })
     );
+})
+
+// update api (also we can do with post)
+app.put('/api/update_product/:id',(req,res)=>{
+
+    const id = req.params.id * 1;
+    const findProduct = products.find(p=> p.id === id);
+    const index = products.indexOf(findProduct);
+    products[index] = req.body;
+    res.status(200).send({
+        'status_code' : 200,
+        'messege' : 'update is sucess'
+    })
+})
+
+// delete
+app.delete("/api/delete_product/:id",(req,res)=>{
+
+    const id = req.params.id *1;
+    const findProduct = products.find(p=>p.id === id)
+    const index = products.indexOf(findProduct);
+
+    products.splice(index,1)
+    
+    res.status(200).send({
+        'status_code' : 200,
+        'messege' : 'delete sucess'
+    })
 })

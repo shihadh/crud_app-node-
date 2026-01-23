@@ -28,6 +28,38 @@ class ProductService {
     return false;
   }
 
+  Future<bool> uopdateProduct(ProductModel prodcut, String id) async {
+    log("message");
+    try {
+    final response = await dio.put("${baseUrl}update_product/$id", data: prodcut.tojson());
+      if (response.statusCode == 200) {
+        log('sucess');
+        return true;
+      }
+    } on DioException catch (e) {
+      log(e.toString());
+    }
+      log("somthing went wrog");
+
+    return false;
+  }
+
+  Future<bool> dalateProduct( String id) async {
+    log("message");
+    try {
+    final response = await dio.delete("${baseUrl}delete_product/$id");
+      if (response.statusCode == 200) {
+        log('sucess');
+        return true;
+      }
+    } on DioException catch (e) {
+      log(e.toString());
+    }
+      log("somthing went wrog");
+
+    return false;
+  }
+
   Future<List<ProductModel>> getProduct()async{
     try{
       final response = await dio.get("${baseUrl}get_product");

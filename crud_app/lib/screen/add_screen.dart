@@ -1,4 +1,5 @@
-import 'package:crud_app/controller/add_controller.dart';
+import 'package:crud_app/controller/crud_controller.dart';
+import 'package:crud_app/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +12,7 @@ class AddScreen extends StatelessWidget {
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<AddController>(
+        child: Consumer<CrudController>(
           builder: (context, value, child) =>
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +35,9 @@ class AddScreen extends StatelessWidget {
                 final (status, messege) = await value.addProdect(value.nameController.text.trim(), value.prizeController.text.trim());
                 status == true ?
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(messege), backgroundColor: Colors.green,)) :
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(messege), backgroundColor: Colors.red,)); 
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(messege), backgroundColor: Colors.red,));
+                context.read<HomeController>().getProduct();
+                
               }, child: Text("submit"))
             ],
           ),

@@ -1,4 +1,4 @@
-import 'package:crud_app/controller/add_controller.dart';
+import 'package:crud_app/controller/crud_controller.dart';
 import 'package:crud_app/controller/home_controller.dart';
 import 'package:crud_app/screen/home.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (context) => AddController(),),
+      ChangeNotifierProvider(create: (context) => CrudController(),),
       ChangeNotifierProvider(create: (context) => HomeController(),),
     ],
     child: const MyApp()));
